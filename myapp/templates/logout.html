@@ -1,0 +1,25 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div
+    style="background-image: url('{% static 'img/imagen-reserva.jpg' %}');
+            position: relative; height: 250px; background-size: cover; background-position: center; background-attachment: fixed; opacity: 0.9; margin-top: -230px; z-index: 1;">
+</div>
+
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card p-4 shadow">
+                <h2 class="text-center mb-4">¡Haz cerrado tu sesion!</h2>
+
+                <div class="text-center mb-4">
+                    <a href="{% url 'index' %}" class="btn btn-dark btn-lg">Volver al inicio</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

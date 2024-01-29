@@ -1,0 +1,43 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div
+    style="background-image: url('{% static 'img/imagen-nosotros1.jpg' %}'); position: relative; height: 250px; background-size: cover; background-position: 50% 140% ; background-attachment: fixed; opacity: 0.9; margin-top: -230px; z-index: 1;">
+</div>
+
+<div class="container mt-5 mb-5">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <img src="{% static 'img/imagen-nosotros2.jpg' %}" alt="Imagen Nosotros"
+                    style="height: 600px;box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <p class="text-dark">
+                <strong>UNA PAREJA EMPRENDEDORA</strong><br>
+                La Vecchia Italian no es solo un restaurante, es el sueño hecho realidad de una pareja apasionada por la
+                auténtica cocina italiana. Nuestra historia comienza en 2019, cuando decidimos compartir nuestra pasión
+                por
+                los sabores tradicionales de Italia con la encantadora ciudad de Rafaela.
+            </p>
+            <p class="text-dark mt-3">
+                Después de meses de dedicación y esfuerzo, inauguramos La Vecchia Italian en el corazón de Rafaela. Cada
+                plato que servimos es una expresión de nuestro amor por la cocina italiana, elaborado con ingredientes
+                frescos
+                y locales para brindarte una experiencia gastronómica únic
+            </p>
+            <p class="text-dark mt-3">
+                Nos enorgullece ser parte de los momentos especiales de nuestros clientes. Desde cenas románticas hasta
+                celebraciones familiares, cada visita a La Vecchia Italian es una oportunidad para compartir la alegría
+                y la
+                exquisitez de la cocina italiana.
+            </p>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}

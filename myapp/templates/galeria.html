@@ -1,0 +1,29 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+
+{% block content %}
+
+
+<div
+    style="background-image: url('{% static 'img/fondo-galeria.jpg' %}'); position: relative; height: 250px; background-size: cover; background-position: 50% 70% ; background-attachment: fixed; opacity: 0.9; margin-top: -230px; z-index: 1;">
+</div>
+
+<div class="container mt-5">
+    <h1 class="text-black text-center">Descubre la Experiencia Visual de Nuestro Restaurante</h1>
+    <p class="lead text-center">Explora nuestra galería de imágenes para sumergirte en nuestro ambiente único y deliciosas
+        creaciones culinarias.</p>
+    <div class="row mt-5">
+        {% for gale in galeria %}
+        <div class="col-md-6 mb-3">
+            <div class="card gallery-card">
+                <img class="card-img-top gallery-img" src="{{ gale.imagen.url }}" alt="{{ gale.nombre }}">
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+
+{% endblock content %}
+

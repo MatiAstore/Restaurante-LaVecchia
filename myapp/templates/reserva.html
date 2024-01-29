@@ -1,0 +1,63 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div
+    style="background-image: url('{% static 'img/imagen-reserva.jpg' %}');
+            position: relative; height: 250px; background-size: cover; background-position: center; background-attachment: fixed; opacity: 0.9; margin-top: -230px; z-index: 1;">
+</div>
+
+{% if not request.user.is_authenticated %}
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card p-4 shadow">
+                <h2 class="text-center mb-4">Realizar Reserva</h2>
+
+                <div class="text-center mb-4">
+                    <p>¿Ya tienes una cuenta?</p>
+                    <a href="{% url 'login' %}?next={{ request.path }}"class="btn btn-dark btn-lg">Iniciar sesión</a>
+                </div>
+
+                <hr class="my-4">
+
+                <div class="text-center">
+                    <p>¿Eres nuevo? ¡Regístrate!</p>
+                    <a href="{% url 'register' %}" class="btn btn-dark btn-lg">Registrarse</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% else %}
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card p-4 shadow text-center">
+                <h2 class="text-center mb-4">¡Bienvenido/a, {{ request.user.username }}!</h2>
+                <p>¡Gracias por iniciar sesión!</p>
+                <p>Ya puedes realizar tu reserva a continuacion</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card p-4 shadow text-center">
+                <h2 class="mb-4">Realizar Reserva</h2>
+                <form method="post" action="{% url 'reserva' %}">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-dark btn-lg mt-3">Confirmar Reserva</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endif %}
+
+{% endblock content %}

@@ -1,0 +1,57 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div
+    style="background-image: url('{% static 'img/imagen-reserva.jpg' %}');
+            position: relative; height: 250px; background-size: cover; background-position: center; background-attachment: fixed; opacity: 0.9; margin-top: -230px; z-index: 1;">
+</div>
+
+<div class="container mt-5">
+    {% if user.is_authenticated %}
+    <!-- Mostrar formulario solo si el usuario ha iniciado sesión -->
+    <div class="col-md-8 mx-auto mt-4">
+        <h3 class="mb-4 text-center ">Dejanos una reseña:</h3>
+        <form method="post" action="{% url 'reseñas' %}" class="w-75 mx-auto">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="text-center mt-4">
+                <button type="submit" class="btn btn-dark w-75 border-0">Enviar Reseña</button>
+            </div>
+        </form>
+    </div>
+    {% else %}
+    <!-- Mostrar mensaje para iniciar sesión si el usuario no ha iniciado sesión -->
+    <div class="alert alert-info" role="alert">
+        Si deseas dejar una reseña, por favor <a href="{% url 'login' %}?next={{ request.path }}">inicia sesión</a>.
+    </div>
+    {% endif %}
+
+    <!-- Título de sección de reseñas -->
+    <h2 class="display-5 text-center mt-5 mb-4">¡Opiniones de nuestros clientes!</h2>
+    
+    <!-- Mostrar reseñas existentes con sombras -->
+    <div class="row row-cols-1 row-cols-md-3 g-4 mt-4 mb-5">
+        {% for resena in reseñas %}
+        <div class="col">
+            <div class="card h-100 shadow">
+                <div class="card-body">
+                    <h5 class="card-title text-primary">{{ resena.usuario.username }}</h5>
+                    <p class="card-text">{{ resena.texto }}</p>
+                    <p class="card-text">
+                        Clasificación:
+                        {% for _ in "x"|rjust:resena.clasificacion %}
+                        <i class="bi bi-star-fill text-warning"></i>
+                        {% endfor %}
+                    </p>
+                    <p class="card-text text-muted">Fecha: {{ resena.fecha_creacion }}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+</div>
+
+{% endblock content %}

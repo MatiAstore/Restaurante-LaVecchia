@@ -1,0 +1,37 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div
+    style="background-image: url('{% static 'img/imagen-reserva.jpg' %}');
+            position: relative; height: 250px; background-size: cover; background-position: center; background-attachment: fixed; opacity: 0.9; margin-top: -230px; z-index: 1;">
+</div>
+
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card p-4 shadow">
+                <h2 class="text-center mb-4">Iniciar Sesion</h2>
+                <form method="POST">
+                    {% csrf_token %}
+
+                    <!-- Renderizar el formulario con errores y estilos de Bootstrap -->
+                    {{ form.as_p }}
+                    
+                    <!-- Estilos para todos los mensajes de error con Bootstrap -->
+                    {% if form.errors %}
+                    <div class="alert alert-danger mt-3" role="alert">
+                        <strong>Error:</strong> Por favor, corrige los errores en el formulario.
+                    </div>
+                    {% endif %}
+
+                    <button type="submit" class="btn btn-primary mt-3">Login</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}

@@ -1,0 +1,30 @@
+/* Cambiar fuente y tamaño de los items de navegacion*/ 
+
+.navbar-nav .nav-link {
+    font-family: 'Your Font', sans-serif;
+    font-size: 16px;
+}
+
+/* Agrega un subrayado al pasar el cursor sobre los enlaces de navegación */
+.navbar-nav .nav-item .nav-link:hover {
+    text-decoration: underline;
+}
+
+/*  Efecto sobre imagenes de galeria  */
+.gallery-card {
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.gallery-card:hover {
+    transform: scale(1.05);
+}
+
+.gallery-img {
+    border-radius: 10px;
+    width: 100%;
+    height: auto;
+}
+

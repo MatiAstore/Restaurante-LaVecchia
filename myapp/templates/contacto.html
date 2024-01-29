@@ -1,0 +1,52 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+
+{% block content %}
+
+<!-- Backgroup navegacion -->
+<div
+    style="background-image: url('{% static 'img/fondo-contacto.jpg' %}');
+            position: relative; height: 250px; background-size: cover; background-position: center; background-attachment: fixed; opacity: 0.9; margin-top: -230px; z-index: 1;">
+</div>
+
+<!-- Formulario y Información Adicional -->
+<div class="container mt-5 mb-5">
+    <div class="row">
+        <!-- Formulario -->
+        <div class="col-md-8 mx-auto">
+            <h1 class="mb-4 text-center">¿En qué podemos ayudarte?</h1>
+            <form method="post" action="{% url 'contacto' %}" class="w-75 mx-auto">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="{{ form.nombre.id_for_label }}" class="form-label">Nombre</label>
+                    {{ form.nombre }}
+                </div>
+
+                <div class="mb-3">
+                    <label for="{{ form.correo.id_for_label }}" class="form-label">Correo electrónico</label>
+                    {{ form.correo }}
+                </div>
+
+                <div class="mb-3">
+                    <label for="{{ form.mensaje.id_for_label }}" class="form-label">Mensaje</label>
+                    {{ form.mensaje }}
+                </div>
+
+                <div class="text-center mt-4">
+                    <button type="submit" class="btn btn-dark w-75 border-0">Enviar mensaje</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Información Adicional -->
+        <div class="col-md-4 text-black">
+            <h2 class="mb-3">Información de Contacto</h2>
+            <p><strong>Estamos en:</strong><br>Lavalle 1131, S2300QWR Rafaela, Santa Fe</p>
+            <p><strong>Llámanos al:</strong><br>+54 123 456 789</p>
+            <p><strong>Escríbenos a:</strong><br>vecchiaitaliana@gmail.com</p>
+            <p><strong>Horario de atención:</strong><br>De lunes a sábado de 9:00 a.m. a 6:00 p.m.</p>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

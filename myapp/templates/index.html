@@ -1,0 +1,84 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+
+{% block content %}
+
+<!-- Primer backgroup -->
+<div class="background-image"
+  style="background-image: url('{% static 'img/imagen-index1.jpg' %}'); position: relative; height: 120vh; background-size: cover; background-position: center; background-attachment: fixed; margin-top: -230px; z-index: 1;">
+  <div
+    style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1; text-align: center; width: 100%;">
+    <h1 class="text-white fw-bold display-3 mb-3">LA VECCHIA ITALIAN</h1>
+    <p class="text-white fw-bold mb-3">
+      <i class="fas fa-map-marker-alt"></i> <!-- Icono de ubicación -->
+      <a href="https://www.google.com/maps/place/Lavalle+1131,+S2300QWR+Rafaela,+Santa+Fe/@-31.242345,-61.4906469,17z/data=!3m1!4b1!4m6!3m5!1s0x95caae4025f7023f:0xf73800e537392591!8m2!3d-31.242345!4d-61.488072!16s%2Fg%2F11jzwmkxyx?entry=ttu"
+        target="_blank" class="text-white fw-bold" style="text-decoration: none; display: block; margin-bottom: 30px;">
+        Lavalle 1131, S2300QWR Rafaela, Santa Fe
+      </a>
+    </p>
+    <button type="button" class="btn btn-outline-light btn-lg rounded-0">ORDENAR EN LÍNEA</button>
+  </div>
+</div>
+
+<!-- Segundo backgroup -->
+<div class="background-image"
+  style="background-image: url('{% static 'img/segundo-back.jpg' %}'); position: relative; height: 80vh; background-size: cover; background-position: center; background-attachment: fixed; margin-top: -110px; z-index: 1;">
+  <div
+    style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1; text-align: center; width: 100%;">
+    <h2 class="text-white fw-bold mb-3">Cena elegante al estilo Italiano</h2>
+    <div class="overlay-container"
+      style="background-color: rgba(0, 0, 0, 0.7); padding: 20px; max-width: 600px; margin: 0 auto; box-shadow: 0 0 10px rgb(0, 0, 0); border-radius: 10px;">
+      <p class="text-white mb-3" style="text-align: justify; font-size: 18px;">
+        Bienvenido a La Vecchia Italian, donde ofrecemos una experiencia gastronómica única con el sabor único de la cocina Italiana. Ya sea que esté aquí para un almuerzo o cena de negocios, celebrando una ocasión especial o buscando
+        un ambiente romántico para una cita, nuestro menú ofrece algo para todos.
+      </p>
+    </div>
+    <p class="text-white mb-3">El servicio de valet parking para La Vecchia Italian está disponible en la calle Lavalle · vestimenta adecuada, por favor · no se permite ropa deportiva</p>
+  </div>
+</div>
+
+<div class="container mt-5 mb-5">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card">
+        <img src="{% static 'img/imagen-index3.jpg' %}" alt="imagen index tres"
+          style="height: 600px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);">
+      </div>
+    </div>
+    <div class="col-md-6">
+      <p class="text-dark">
+        <strong>LA VECCHIA ITALIAN</strong><br>
+        Enclavado en el corazón de la Toscana imaginaria, La Vecchia Italian captura la esencia de las tradiciones
+        culinarias de Italia con un toque moderno y artesanal. Guiados por la pasión y el amor por la auténtica cocina
+        italiana, nuestro chef ejecutivo, Giovanni Rossi, da vida a sabores que te transportarán a la cálida y acogedora
+        Italia.
+      </p>
+      <p class="text-dark mt-3">
+        Destacando en nuestra cocina se encuentran la parrilla, el horno y la plancha de leña, cuidadosamente diseñados
+        para infundir cada plato con un toque distintivo. La ceniza roja, evocando los mágicos atardeceres italianos, se
+        convierte en nuestra musa culinaria, inspirando el nombre de nuestro encantador rincón gastronómico.
+      </p>
+      <p class="text-dark mt-3">
+        El menú de La Vecchia Italian, meticulosamente elaborado por el Chef Rossi, ofrece una experiencia gastronómica
+        incomparable. Desde pastas frescas hechas a mano hasta mariscos frescos y carnes premium locales, cada bocado
+        cuenta una historia de pasión por la calidad y la excelencia culinaria. Las verduras frescas de temporada
+        completan nuestra oferta, resaltando la diversidad y frescura en cada plato.
+      </p>
+      <div class="d-flex justify-content-center mt-3">
+        <a href="{% url 'carta' %}" class="btn btn-outline-dark btn-lg rounded-0 me-5">CARTA</a>
+        <a href="{% url 'reserva' %}" class="btn btn-outline-dark btn-lg rounded-0">RESERVAR</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+{% endblock content %}
+
+
