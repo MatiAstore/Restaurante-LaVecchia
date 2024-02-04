@@ -1,11 +1,11 @@
 {% extends "layouts/base.html" %}
 {% load static %}
-
+{% block title %}Pagina principal{% endblock %}
 {% block content %}
 
 <!-- Primer backgroup -->
 <div class="background-image"
-  style="background-image: url('{% static 'img/imagen-index1.jpg' %}'); position: relative; height: 120vh; background-size: cover; background-position: center; background-attachment: fixed; margin-top: -230px; z-index: 1;">
+  style="background-image: url('{% static 'img/imagen-index1.webp' %}'); position: relative; height: 120vh; background-size: cover; background-position: center; background-attachment: fixed; margin-top: -230px; z-index: 1;">
   <div
     style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1; text-align: center; width: 100%;">
     <h1 class="text-white fw-bold display-3 mb-3">LA VECCHIA ITALIAN</h1>
@@ -16,13 +16,13 @@
         Lavalle 1131, S2300QWR Rafaela, Santa Fe
       </a>
     </p>
-    <button type="button" class="btn btn-outline-light btn-lg rounded-0">ORDENAR EN LÍNEA</button>
+    <a href="{% url 'reserva' %}" class="text-uppercase btn btn-outline-light btn-lg rounded-0">Reservar en línea</a>
   </div>
 </div>
 
 <!-- Segundo backgroup -->
 <div class="background-image"
-  style="background-image: url('{% static 'img/segundo-back.jpg' %}'); position: relative; height: 80vh; background-size: cover; background-position: center; background-attachment: fixed; margin-top: -110px; z-index: 1;">
+  style="background-image: url('{% static 'img/segundo-back.webp' %}'); position: relative; height: 80vh; background-size: cover; background-position: center; background-attachment: fixed; margin-top: -110px; z-index: 1;">
   <div
     style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1; text-align: center; width: 100%;">
     <h2 class="text-white fw-bold mb-3">Cena elegante al estilo Italiano</h2>
@@ -41,7 +41,7 @@
   <div class="row">
     <div class="col-md-6">
       <div class="card">
-        <img src="{% static 'img/imagen-index3.jpg' %}" alt="imagen index tres"
+        <img src="{% static 'img/imagen-index3.webp' %}" alt="imagen index tres"
           style="height: 600px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);">
       </div>
     </div>

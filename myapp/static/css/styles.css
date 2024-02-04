@@ -5,8 +5,8 @@
     font-size: 16px;
 }
 
-/* Agrega un subrayado al pasar el cursor sobre los enlaces de navegación */
-.navbar-nav .nav-item .nav-link:hover {
+/* Subrayado al hacer clic en los enlaces de navegación */
+.navbar-nav .nav-item .nav-link:focus {
     text-decoration: underline;
 }
 

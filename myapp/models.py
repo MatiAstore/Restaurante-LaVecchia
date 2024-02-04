@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 class Galeria(models.Model):
     nombre = models.CharField(max_length=50)
-    imagen = models.ImageField(upload_to= "imagenes", null = True)
+    imagen = models.ImageField(upload_to= "imagenes/", null = True)
 
     def __str__(self):
         return f"{self.nombre}" 
@@ -12,7 +12,7 @@ class Carta(models.Model):
     TIPO_CHOICES = [
         ('Bebidas', 'Bebidas'),
         ('Postres', 'Postres'),
-        ('Comidas Principales', 'Comidas Principales'),
+        ('Comidas', 'Comidas'),
         ('Entradas', 'Entradas'),
     ]
 

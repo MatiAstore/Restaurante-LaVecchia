@@ -1,12 +1,13 @@
 from django.shortcuts import render, redirect 
-from .models import Galeria, Carta, Resena
-from .forms import ContactoForm, UserRegisterForm, ReservaForm, ResenaForm
+from .models import Galeria, Carta, Resena, Reserva
+from .forms import ContactoForm, UserRegisterForm, ReservaForm, ResenaForm, CustomAuthenticationForm
 from django.contrib.auth.views import LoginView
 from django.contrib.auth import logout
 from django.contrib import messages #necesario para las notifiaciones de inicio, cierre y registro exitoso.
 from django.db.models import Count
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy #
+from datetime import datetime
 
 
 
@@ -15,7 +16,7 @@ def index(request):
 
 def nosotros(request):
     return render(request, "nosotros.html")
-.0
+
 
 def galeria(request):
     galeria = Galeria.objects.all()
@@ -26,7 +27,7 @@ def contacto(request):
         form = ContactoForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Reseña enviada exitosamente.')
+            messages.success(request, 'Contacto enviado exitosamente.')
             return redirect(
                 "contacto"
             ) 
@@ -47,6 +48,7 @@ def carta(request, categoria=None):
     tipos_comida = Carta.objects.values('tipo').annotate(count=Count('tipo'))
 
     return render(request, "carta.html", {"carta": carta, "galeria": galeria, "tipos_comida": tipos_comida, "categoria_seleccionada": categoria})
+
 
 def reseñas(request):
     # Recupera todas las reseñas de la base de datos
@@ -82,7 +84,6 @@ def reserva(request):
 
     return render(request, 'reserva.html', {'form': form})
 
-
 # El registro se hizo manuelmente, no utilizamos librerias como para Logout y Login
 def register(request):
     if request.method == 'POST':
@@ -98,15 +99,14 @@ def register(request):
     return render(request, "register.html", {'form': form})
 
 
-#heredamos la clase LoginView y modifico la vista entorno a esa clase (Tambien se puede hacer utilizando de otro libreria el "Login" pero como lo hice de esta forma y funciono lo deje asi)
-class CustomLoginView(LoginView): 
+class CustomLoginView(LoginView):
+    authentication_form = CustomAuthenticationForm
+
     def form_valid(self, form):
         messages.success(self.request, "¡Inicio de sesión exitoso!")
-
         return super().form_valid(form)
 
     def get_success_url(self):
-        # Utiliza el parámetro 'next' si está presente, de lo contrario, redirige a la página por defecto
         return self.request.GET.get('next', reverse_lazy('index'))
 
     

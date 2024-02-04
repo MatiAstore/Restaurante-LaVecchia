@@ -1,95 +1,122 @@
-{% extends "layouts/base.html" %}
-{% load static %}
-
+{% extends "layouts/base.html" %} 
+{% load static %} 
+{% block title %}Carta{% endblock %}
 {% block content %}
 
 <div
-    style="background-image: url('{% static 'img/fondo-galeria.jpg' %}'); position: relative; height: 250px; background-size: cover; background-position: 50% 70% ; background-attachment: fixed; opacity: 0.9; margin-top: -230px; z-index: 1;">
-</div>
-
+  style="
+    background-image: url('{% static 'img/fondo-galeria.webp' %}');
+    position: relative;
+    height: 250px;
+    background-size: cover;
+    background-position: 50% 70%;
+    background-attachment: fixed;
+    opacity: 0.9;
+    margin-top: -230px;
+    z-index: 1;
+  "
+></div>
 
 <div class="container mt-5 mb-5">
-    <div class="text-black text-center">
-        <h3 class="fw-bold">CARTA</h3>
-        <p>Dinner is served</p>
-        <p>5:00pm to 10:00pm Sunday through Thursday</p>
-        <p>5:00pm to 10:00pm Friday and Saturday</p>
-        <hr class="border-danger border-2 border-dashed w-40 my-4">
+  <div class="text-black text-center">
+    <h3 class="fw-bold">Carta</h3>
+    <p>Hora apertura: 10:00am.</p>
+    <p>Hora cierre: 22:00pm.</p>
+    <p>Todos los dias.</p>
+    <hr class="border-danger border-2 border-dashed w-40 my-4" />
+  </div>
+
+  <div class="row justify-content-center mt-3">
+    {% for gale in galeria|slice:":3" %}
+    <div class="col-md-4 mb-3">
+      <div class="text-center">
+        <img
+          class="card-img-top gallery-img img-fluid"
+          src="{{ gale.imagen.url }}"
+          alt="{{ gale.nombre }}"
+        />
+      </div>
     </div>
+    {% endfor %}
+  </div>
 
-    <div class="row justify-content-center mt-3">
-        {% for gale in galeria|slice:":3" %}
-        <div class="col-md-4 mb-3">
-            <div class="text-center">
-                <img class="card-img-top gallery-img img-fluid" src="{{ gale.imagen.url }}" alt="{{ gale.nombre }}">
-            </div>
-        </div>
-        {% endfor %}
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item">
+            <a
+              class="nav-link {% if not categoria_seleccionada %}active{% endif %}"
+              href="{% url 'carta' %}"
+              >Todos</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link {% if categoria_seleccionada == 'Comidas Principales' %}active{% endif %}"
+              href="{% url 'carta_categoria' categoria='Comidas Principales' %}"
+              >Comidas</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link {% if categoria_seleccionada == 'Postres' %}active{% endif %}"
+              href="{% url 'carta_categoria' categoria='Postres' %}"
+              >Postres</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link {% if categoria_seleccionada == 'Entradas' %}active{% endif %}"
+              href="{% url 'carta_categoria' categoria='Entradas' %}"
+              >Entradas</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link {% if categoria_seleccionada == 'Bebidas' %}active{% endif %}"
+              href="{% url 'carta_categoria' categoria='Bebidas' %}"
+              >Bebidas</a
+            >
+          </li>
+        </ul>
+      </div>
     </div>
+  </nav>
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav mx-auto">
-                    <li class="nav-item">
-                        <a class="nav-link {% if not categoria_seleccionada %}active{% endif %}"
-                            href="{% url 'carta' %}">Todos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {% if categoria_seleccionada == 'ComidasPrincipales' %}active{% endif %}"
-                            href="{% url 'carta_categoria' categoria='Comidas Principales' %}">Comidas Principales</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {% if categoria_seleccionada == 'Postres' %}active{% endif %}"
-                            href="{% url 'carta_categoria' categoria='Postres' %}">Postres</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {% if categoria_seleccionada == 'Entradas' %}active{% endif %}"
-                            href="{% url 'carta_categoria' categoria='Entradas' %}">Entradas</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {% if categoria_seleccionada == 'Bebidas' %}active{% endif %}"
-                            href="{% url 'carta_categoria' categoria='Bebidas' %}">Bebidas</a>
-                    </li>
-                </ul>
+  <div class="container mt-3" id="comidas-container">
+    <div class="row">
+      {% for tipo in tipos_comida %}
+      <div class="col-md-3 mb-4">
+        <div class="card border-dark">
+          <div class="card-header bg-dark text-white text-center">
+            <h5>{{ tipo.tipo }}</h5>
+          </div>
+          <div class="card-body">
+            {% for comida in carta %} {% if comida.tipo == tipo.tipo %}
+            <div class="mb-3">
+              <h6 class="card-title fw-bold">{{ comida.nombre }}</h6>
+              <p class="card-text">Precio: ${{ comida.precio }}</p>
+              <hr class="border-dark border-2 border-dashed w-30 my-2" />
             </div>
+            {% endif %} {% endfor %}
+          </div>
         </div>
-    </nav>
-    
-    <div class="container mt-3" id="comidas-container">
-        <div class="row">
-            {% for tipo in tipos_comida %}
-            <div class="col-md-3 mb-4">
-                <div class="card border-dark">
-                    <div class="card-header bg-dark text-white text-center">
-                        <h5>{{ tipo.tipo }}</h5>
-                    </div>
-                    <div class="card-body">
-                        {% for comida in carta %}
-                        {% if comida.tipo == tipo.tipo %}
-                        <div class="mb-3">
-                            <h6 class="card-title fw-bold">{{ comida.nombre }}</h6>
-                            <p class="card-text">Precio: ${{ comida.precio }}</p>
-                            <hr class="border-dark border-2 border-dashed w-30 my-2">
-                        </div>
-                        {% endif %}
-                        {% endfor %}
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
+      </div>
+      {% endfor %}
     </div>
-
-
-
-
-
-
+  </div>
 </div>
 
 {% endblock content %}

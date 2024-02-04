@@ -1,10 +1,10 @@
 {% extends "layouts/base.html" %}
 {% load static %}
-
+{% block title %}Reservas{% endblock %}
 {% block content %}
 
 <div
-    style="background-image: url('{% static 'img/imagen-reserva.jpg' %}');
+    style="background-image: url('{% static 'img/imagen-reserva.webp' %}');
             position: relative; height: 250px; background-size: cover; background-position: center; background-attachment: fixed; opacity: 0.9; margin-top: -230px; z-index: 1;">
 </div>
 
@@ -44,20 +44,65 @@
 </div>
 
 <div class="container mt-5 mb-5">
-    <div class="row justify-content-center">
+    <div class="row justify-content-center align-items-center"> <!-- Añadido 'align-items-center' -->
         <div class="col-md-6">
             <div class="card p-4 shadow text-center">
                 <h2 class="mb-4">Realizar Reserva</h2>
                 <form method="post" action="{% url 'reserva' %}">
                     {% csrf_token %}
-                    {{ form.as_p }}
-                    <button type="submit" class="btn btn-dark btn-lg mt-3">Confirmar Reserva</button>
+                    {% for field in form %}
+                        <div class="form-group row align-items-center"> <!-- Añadido 'align-items-center' -->
+                            <label for="{{ field.id_for_label }}" class="col-md-6 col-form-label align-self-start">{{ field.label }}</label> <!-- Modificado 'col-md-9' a 'col-md-4' y 'text-md-end' -->
+                            <div class="col-md-5"> 
+                                {{ field }}
+                                {% if field.errors %}
+                                    <ul class="errorlist">
+                                        {% for error in field.errors %}
+                                            <li>{{ error }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                    <button type="submit" class="btn btn-dark btn-lg mt-3" id="submit-button">Confirmar Reserva</button>
                 </form>
+                {% if form.non_field_errors %}
+                    <div class="alert alert-danger mt-3" role="alert">
+                        {{ form.non_field_errors|first }}
+                    </div>
+                {% endif %}
             </div>
         </div>
     </div>
 </div>
 
+
+
+
+
+
 {% endif %}
+
+<script>
+    {% if form.errors %}
+        // Espera a que se cargue completamente el documento
+        document.addEventListener("DOMContentLoaded", function() {
+            // Desplaza la ventana hacia el botón de envío
+            var submitButton = document.getElementById('submit-button');
+            if (submitButton) {
+                submitButton.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
+            }
+        });
+    {% endif %}
+</script>
+
+
+
+
+
+
+
+
 
 {% endblock content %}

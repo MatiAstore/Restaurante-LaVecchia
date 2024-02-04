@@ -2,116 +2,195 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}"> 
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %} {% endblock %}</title>
+    <link
+      href="{% static '/img/logo-restaurante.webp' %}"
+      rel="icon"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/styles.css' %}"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
 
     <!-- Bootstrap Icons  -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css"
+    />
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    
-    <!-- Bootstrap JS -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+
+    <!-- Agrega el enlace al archivo JavaScript de Bootstrap y jQuery (si es necesario) -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+      integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+      integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+      crossorigin="anonymous"
+    ></script>
 
     <title>Home</title>
-</head>
-<body>
-
-<!-- Navegacion -->
-<div class="container">
-  <nav class="navbar navbar-expand-lg mb-4 mt-5 bg-transparent" style="z-index: 2;">
+  </head>
+  <body>
+    <!-- Navegacion -->
     <div class="container">
-      <div class="collapse navbar-collapse justify-content-center">
-        <ul class="navbar-nav fs-5 text d-flex align-items-center" style="margin-right: auto; margin-left: auto;">
-          <li class="nav-item mx-3">
-            <a class="nav-link text-white fw-bold" href="{% url 'carta' %}">CARTA</a>
-          </li>
-          <li class="nav-item mx-3">
-            <a class="nav-link text-white fw-bold" href="{% url 'reseñas' %}">RESEÑAS</a>
-          </li>
-          <li class="nav-item mx-3">
-            <a class="nav-link text-white fw-bold" href="{% url 'reserva' %}">RESERVAR</a>
-          </li>
-          <li class="nav-item mx-3">
-            <a class="nav-link" href="{% url 'index' %}">
-              <img src="{% static 'img/logo-restaurante.jpg' %}" alt="Logo Restaurante"
-                style="height: 120px; width: 120px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.7);">
-            </a>
-          </li>
-          <li class="nav-item mx-3">
-            <a class="nav-link text-white fw-bold" href="{% url 'galeria' %}">GALERIA</a>
-          </li>
-          <li class="nav-item mx-3">
-            <a class="nav-link text-white fw-bold" href="{% url 'nosotros' %}">NOSOTROS</a>
-          </li>
-          <li class="nav-item mx-3">
-            <a class="nav-link text-white fw-bold" href="{% url 'contacto' %}">CONTACTO</a>
-          </li>
-        </ul>
+      <nav
+        class="navbar navbar-expand-lg mb-4 mt-5 bg-transparent"
+        style="z-index: 2"
+      >
+        <div class="container">
+          <div class="collapse navbar-collapse justify-content-center">
+            <ul
+              class="navbar-nav fs-5 text d-flex align-items-center"
+              style="margin-right: auto; margin-left: auto"
+            >
+              <li class="nav-item mx-3">
+                <a
+                  class="nav-link text-white fw-bold hover-zoom"
+                  href="{% url 'carta' %}"
+                  >CARTA</a
+                >
+              </li>
+              <li class="nav-item mx-3">
+                <a
+                  class="nav-link text-white fw-bold hover-zoom"
+                  href="{% url 'reseñas' %}"
+                  >RESEÑAS</a
+                >
+              </li>
+              <li class="nav-item mx-3">
+                <a
+                  class="nav-link text-white fw-bold hover-zoom"
+                  href="{% url 'reserva' %}"
+                  >RESERVAR</a
+                >
+              </li>
+              <li class="nav-item mx-3">
+                <a class="nav-link" href="{% url 'index' %}">
+                  <img
+                    src="{% static 'img/logo-restaurante.webp' %}"
+                    alt="Logo Restaurante"
+                    style="
+                      height: 120px;
+                      width: 120px;
+                      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.7);
+                    "
+                  />
+                </a>
+              </li>
+              <li class="nav-item mx-3">
+                <a
+                  class="nav-link text-white fw-bold hover-zoom"
+                  href="{% url 'galeria' %}"
+                  >GALERIA</a
+                >
+              </li>
+              <li class="nav-item mx-3">
+                <a
+                  class="nav-link text-white fw-bold hover-zoom"
+                  href="{% url 'nosotros' %}"
+                  >NOSOTROS</a
+                >
+              </li>
+              <li class="nav-item mx-3">
+                <a
+                  class="nav-link text-white fw-bold hover-zoom"
+                  href="{% url 'contacto' %}"
+                  >CONTACTO</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <!-- Comprueba si hay mensajes en la cola de mensajes, si lo hay lo muestra -->
+    {% if messages %}
+    <div class="container mt-4 position-relative">
+      <div class="row">
+        <div class="col-md-12">
+          <div
+            class="alert alert-success position-absolute top-0 start-50 translate-middle-x"
+            role="alert"
+            style="z-index: 3"
+          >
+            {% for message in messages %} {{ message }} {% endfor %}
+          </div>
+        </div>
       </div>
     </div>
-  </nav>
-</div>
 
-<!-- Comprueba si hay mensajes en la cola de mensajes, si lo hay lo muestra -->
-{% if messages %}
-<div class="container mt-4 position-relative">
-  <div class="row">
-    <div class="col-md-12">
-      <div class="alert alert-success position-absolute top-0 start-50 translate-middle-x" role="alert"
-        style="z-index: 3;">
-        {% for message in messages %}
-          {{ message }}
-        {% endfor %}
-      </div>
+    <script>
+      // Desvanecer el mensaje después de 5 segundos (5000 milisegundos)
+      setTimeout(function () {
+        document.querySelector(".alert").style.opacity = "0";
+      }, 3000);
+    </script>
+    {% endif %}
+
+    <!-- Contenedor para la información del usuario y cerrar sesión cuando inicie sesion -->
+    {% if user.is_authenticated %}
+    <!-- Contenedor semi-transparente para la información del usuario y cerrar sesión con Bootstrap -->
+    <div
+      id="user-info-container"
+      class="position-fixed top-0 end-0 p-3 bg-dark bg-opacity-75 shadow"
+      style="z-index: 1000; max-width: 300px; color: #fff"
+    >
+      <p class="mb-0 fs-5 fw-bold">¡Bienvenido, {{ user.username }}!</p>
+      <a href="{% url 'logout' %}" class="text-light text-decoration-none"
+        >Cerrar sesión</a
+      >
     </div>
-  </div>
-</div>
+    {% endif %} {% block content %} {% endblock %}
 
-<script>
-  // Desvanecer el mensaje después de 5 segundos (5000 milisegundos)
-  setTimeout(function () {
-    document.querySelector('.alert').style.opacity = '0';
-  }, 3000);
-</script>
-{% endif %}
-
-
-<!-- Contenedor para la información del usuario y cerrar sesión cuando inicie sesion -->
-{% if user.is_authenticated %}
-<!-- Contenedor semi-transparente para la información del usuario y cerrar sesión con Bootstrap -->
-<div id="user-info-container" class="position-fixed top-0 end-0 p-3 bg-dark bg-opacity-75 shadow"
-  style="z-index: 1000; max-width: 300px; color: #fff;">
-  <p class="mb-0 fs-5 fw-bold">¡Bienvenido, {{ user.username }}!</p>
-  <a href="{% url 'logout' %}" class="text-light text-decoration-none">Cerrar sesión</a>
-</div>
-{% endif %}
-
-
-{% block content %} {% endblock %}
-
-<footer class="bg-dark text-white text-center py-3">
-  <div class="container">
-    <div class="d-flex justify-content-center">
-      <div class="mx-3">
-        <a href="https://www.facebook.com/" class="text-white text-decoration-none underline"
-          target="_blank">Facebook</a>
+    <footer class="bg-dark text-white text-center py-3">
+      <div class="container">
+        <div class="d-flex justify-content-between align-items-center">
+          <div>
+            <p class="m-0">© 2024 Todos los derechos reservados</p>
+          </div>
+          <div class="mx-3 ml-auto"> <!-- Agregado ml-auto aquí -->
+            <a
+              href="https://www.facebook.com/"
+              class="text-white text-decoration-none underline"
+              target="_blank"
+              ><svg fill="#ffffff" height="32px" width="32px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="-143 145 512 512" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path d="M329,145h-432c-22.1,0-40,17.9-40,40v432c0,22.1,17.9,40,40,40h432c22.1,0,40-17.9,40-40V185C369,162.9,351.1,145,329,145z M339,617c0,5.5-4.5,10-10,10h-432c-5.5,0-10-4.5-10-10V185c0-5.5,4.5-10,10-10h432c5.5,0,10,4.5,10,10V617z"></path> <path d="M146.8,313.7c10.3,0,21.3,3.2,21.3,3.2l6.6-39.2c0,0-14-4.8-47.4-4.8c-20.5,0-32.4,7.8-41.1,19.3 c-8.2,10.9-8.5,28.4-8.5,39.7v25.7H51.2v38.3h26.5v133h49.6v-133h39.3l2.9-38.3h-42.2v-29.9C127.3,317.4,136.5,313.7,146.8,313.7z"></path> </g> </g></svg></a
+            >
+          </div>
+          <div class="mx-3">
+            <a
+              href="https://www.instagram.com/"
+              class="text-white text-decoration-none underline"
+              target="_blank"
+              ><svg fill="#ffffff" height="32px" width="32px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="-143 145 512 512" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path d="M329,145h-432c-22.1,0-40,17.9-40,40v432c0,22.1,17.9,40,40,40h432c22.1,0,40-17.9,40-40V185C369,162.9,351.1,145,329,145z M339,617c0,5.5-4.5,10-10,10h-432c-5.5,0-10-4.5-10-10V185c0-5.5,4.5-10,10-10h432c5.5,0,10,4.5,10,10V617z"></path> <path d="M191.6,273h-157c-27.3,0-49.5,22.2-49.5,49.5v52.3v104.8c0,27.3,22.2,49.5,49.5,49.5h157c27.3,0,49.5-22.2,49.5-49.5V374.7 v-52.3C241,295.2,218.8,273,191.6,273z M205.8,302.5h5.7v5.6v37.8l-43.3,0.1l-0.1-43.4L205.8,302.5z M76.5,374.7 c8.2-11.3,21.5-18.8,36.5-18.8s28.3,7.4,36.5,18.8c5.4,7.4,8.5,16.5,8.5,26.3c0,24.8-20.2,45.1-45.1,45.1C88,446.1,68,425.8,68,401 C68,391.2,71.2,382.1,76.5,374.7z M216.1,479.5c0,13.5-11,24.5-24.5,24.5h-157c-13.5,0-24.5-11-24.5-24.5V374.7h38.2 c-3.3,8.1-5.2,17-5.2,26.3c0,38.6,31.4,70,70,70c38.6,0,70-31.4,70-70c0-9.3-1.9-18.2-5.2-26.3h38.2V479.5z"></path> </g> </g></svg></a
+            >
+          </div>
+        </div>
       </div>
-      <div class="mx-3">
-        <p class="m-0">.</p>
-      </div>
-      <div class="mx-3">
-        <a href="https://www.instagram.com/" class="text-white text-decoration-none underline"
-          target="_blank">Instagram</a>
-      </div>
-    </div>
-  </div>
-</footer>
-
-</body>
+    </footer>
+    
+    
+    
+    
+    
+  </body>
 </html>
