@@ -1,0 +1,36 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+{% block title %}Confirmación de Reserva{% endblock %}
+{% block content %}
+
+<div
+    style="background-image: url('{% static 'img/imagen-reserva.webp' %}');
+            position: relative; height: 250px; background-size: cover; background-position: center; background-attachment: fixed; opacity: 0.9; margin-top: -230px; z-index: 1;">
+</div>
+
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-header bg-success text-white text-center">
+                    <h2 class="mb-0">¡Reserva Confirmada!</h2>
+                </div>
+                <div class="card-body">
+                    <p class="lead">Gracias por reservar en nuestro restaurante.</p>
+                    <div class="alert alert-info" role="alert">
+                        <p>Detalles de la reserva:</p>
+                        <ul class="list-unstyled">
+                            <li><strong>Cantidad de personas:</strong> {{ reserva.cantidad_personas }}</li>
+                            <li><strong>Fecha:</strong> {{ reserva.fecha }}</li>
+                            <li><strong>Hora:</strong> {{ reserva.hora }}</li>
+                        </ul>
+                    </div>
+                    <p class="text-muted">Te enviamos un correo electrónico de confirmación. ¡Esperamos verte pronto!
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

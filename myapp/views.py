@@ -1,14 +1,13 @@
-from django.shortcuts import render, redirect 
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Galeria, Carta, Resena, Reserva
 from .forms import ContactoForm, UserRegisterForm, ReservaForm, ResenaForm, CustomAuthenticationForm
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LoginView, PasswordResetView
 from django.contrib.auth import logout
 from django.contrib import messages #necesario para las notifiaciones de inicio, cierre y registro exitoso.
 from django.db.models import Count
 from django.shortcuts import render, redirect
-from django.urls import reverse_lazy #
-from datetime import datetime
-
+from django.urls import reverse_lazy 
+from django.core.mail import send_mail
 
 
 def index(request):
@@ -70,6 +69,8 @@ def reseñas(request):
 
     return render(request, 'reseñas.html', {'reseñas': reseñas, 'form': form})
 
+from django.shortcuts import render, redirect
+
 def reserva(request):
     if request.method == 'POST':
         form = ReservaForm(request.POST)
@@ -77,12 +78,24 @@ def reserva(request):
             reserva = form.save(commit=False)
             reserva.usuario = request.user
             reserva.save()
-            messages.success(request, f"Reserva realizada existosamente. Gracias {request.user}.")
-            return redirect('reserva')
+            send_mail(
+                'Confirmación de Reserva',
+                'Gracias por reservar en nuestro restaurante. Detalles de la reserva:\nCantidad de personas: {}\nFecha: {}\nHora: {}'.format(reserva.cantidad_personas, reserva.fecha, reserva.hora),
+                'tu@email.com',
+                [request.user.email],
+                fail_silently=False,
+            )
+            # Redirige a la página de confirmación con los detalles de la reserva
+            return redirect('confirmacion_reserva', reserva_id=reserva.id)
     else:
         form = ReservaForm()
 
     return render(request, 'reserva.html', {'form': form})
+
+def confirmacion_reserva(request, reserva_id):
+    reserva = get_object_or_404(Reserva, id=reserva_id)
+    return render(request, 'confirmacion_reserva.html', {'reserva': reserva})
+
 
 # El registro se hizo manuelmente, no utilizamos librerias como para Logout y Login
 def register(request):
@@ -107,9 +120,13 @@ class CustomLoginView(LoginView):
         return super().form_valid(form)
 
     def get_success_url(self):
-        return self.request.GET.get('next', reverse_lazy('index'))
+        return self.request.GET.get('next', reverse_lazy('reserva'))
 
-    
+class CustomPasswordResetView(PasswordResetView):
+    template_name = 'registration/password_reset_form.html'  
+    email_template_name = 'registration/password_reset_email.html'  
+
+
 # Para esto lo habia hecho de la misma forma que el Login, sin embargo, saltaba error GET al cerrar sesion y no funcionaba, por ende le pedi al amigo y utilizamos otra libreria para el Logout
 def custom_logout(request):
     logout(request)
