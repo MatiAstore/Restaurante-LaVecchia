@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-from .views import CustomLoginView, custom_logout, confirmacion_reserva, CustomPasswordResetView
+from .views import CustomLoginView, custom_logout, confirmacion_reserva, CustomPasswordResetView, eliminar_reserva
 from django.contrib.auth import views as auth_views 
  
 urlpatterns = [
@@ -10,6 +10,7 @@ urlpatterns = [
     path("nosotros/", views.nosotros, name="nosotros"),
     path('reserva/', views.reserva, name="reserva"),  
     path('confirmacion_reserva/<int:reserva_id>/', confirmacion_reserva, name='confirmacion_reserva'), 
+    path('reserva/<int:reserva_id>/eliminar/', eliminar_reserva, name='eliminar_reserva'),
     path('carta/', views.carta, name='carta'),
     path('carta/<str:categoria>/', views.carta, name='carta_categoria'),
     path('register/', views.register, name="register"),

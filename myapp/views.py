@@ -8,6 +8,7 @@ from django.db.models import Count
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy 
 from django.core.mail import send_mail
+from django.contrib.auth.decorators import login_required
 
 
 def index(request):
@@ -69,7 +70,6 @@ def reseñas(request):
 
     return render(request, 'reseñas.html', {'reseñas': reseñas, 'form': form})
 
-from django.shortcuts import render, redirect
 
 def reserva(request):
     if request.method == 'POST':
@@ -89,13 +89,25 @@ def reserva(request):
             return redirect('confirmacion_reserva', reserva_id=reserva.id)
     else:
         form = ReservaForm()
+    reservas_usuario = None
+    if request.user.is_authenticated:
+        reservas_usuario = Reserva.objects.filter(usuario=request.user)
+    return render(request, 'reserva.html', {'form': form, 'reservas_usuario': reservas_usuario}) 
 
-    return render(request, 'reserva.html', {'form': form})
 
 def confirmacion_reserva(request, reserva_id):
     reserva = get_object_or_404(Reserva, id=reserva_id)
     return render(request, 'confirmacion_reserva.html', {'reserva': reserva})
 
+def eliminar_reserva(request, reserva_id):
+    reserva = get_object_or_404(Reserva, id=reserva_id)
+    # Verifica si el usuario es el propietario de la reserva
+    if reserva.usuario == request.user:
+        if request.method == 'POST':
+            reserva.delete()
+            return redirect('reserva')
+    # Si la solicitud no es POST, redirige nuevamente a la página de reservas
+    return redirect('reserva')
 
 # El registro se hizo manuelmente, no utilizamos librerias como para Logout y Login
 def register(request):

@@ -37,47 +37,74 @@
             <div class="card p-4 shadow text-center">
                 <h2 class="text-center mb-4">¡Bienvenido/a, {{ request.user.username }}!</h2>
                 <p>¡Gracias por iniciar sesión!</p>
-                <p>Ya puedes realizar tu reserva a continuacion</p>
+                <p>Ya puedes realizar tu reserva a continuación.</p>
             </div>
         </div>
     </div>
 </div>
 
 <div class="container mt-5 mb-5">
-    <div class="row justify-content-center align-items-center"> <!-- Añadido 'align-items-center' -->
-        <div class="col-md-6">
-            <div class="card p-4 shadow text-center">
-                <h2 class="mb-4">Realizar Reserva</h2>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card p-4 shadow">
+                <h2 class="text-center mb-4">Realizar Reserva</h2>
                 <form method="post" action="{% url 'reserva' %}">
                     {% csrf_token %}
                     {% for field in form %}
-                        <div class="form-group row align-items-center"> <!-- Añadido 'align-items-center' -->
-                            <label for="{{ field.id_for_label }}" class="col-md-6 col-form-label align-self-start">{{ field.label }}</label> <!-- Modificado 'col-md-9' a 'col-md-4' y 'text-md-end' -->
-                            <div class="col-md-5"> 
-                                {{ field }}
-                                {% if field.errors %}
-                                    <ul class="errorlist">
-                                        {% for error in field.errors %}
-                                            <li>{{ error }}</li>
-                                        {% endfor %}
-                                    </ul>
-                                {% endif %}
-                            </div>
+                    <div class="form-group row">
+                        <label for="{{ field.id_for_label }}" class="col-md-4 col-form-label">{{ field.label }}</label>
+                        <div class="col-md-8">
+                            {{ field }}
+                            {% if field.errors %}
+                            <ul class="errorlist">
+                                {% for error in field.errors %}
+                                <li>{{ error }}</li>
+                                {% endfor %}
+                            </ul>
+                            {% endif %}
                         </div>
+                    </div>
                     {% endfor %}
-                    <button type="submit" class="btn btn-dark btn-lg mt-3" id="submit-button">Confirmar Reserva</button>
+                    <div class="form-group row justify-content-center">
+                        <div class="col-md-8">
+                            <button type="submit" class="btn btn-dark btn-lg btn-block" id="submit-button">Confirmar Reserva</button>
+                        </div>
+                    </div>
                 </form>
                 {% if form.non_field_errors %}
-                    <div class="alert alert-danger mt-3" role="alert">
-                        {{ form.non_field_errors|first }}
-                    </div>
+                <div class="alert alert-danger mt-3" role="alert">
+                    {{ form.non_field_errors|first }}
+                </div>
                 {% endif %}
             </div>
         </div>
     </div>
 </div>
 
-
+{% if reservas_usuario %}
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card p-4 shadow">
+                <h2 class="text-center mb-4">Tus Reservas</h2>
+                <div class="list-group">
+                    {% for reserva in reservas_usuario %}
+                    <div class="list-group-item">
+                        <p class="mb-0"><strong>Fecha:</strong> {{ reserva.fecha }}</p>
+                        <p class="mb-0"><strong>Hora:</strong> {{ reserva.hora }}</p>
+                        <p class="mb-0"><strong>Cantidad de Personas:</strong> {{ reserva.cantidad_personas }}</p>
+                        <form method="post" action="{% url 'eliminar_reserva' reserva.id %}" style="display: inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger btn-sm float-end">Eliminar</button>
+                        </form>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
 
 
 
